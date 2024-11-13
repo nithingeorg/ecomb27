@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div style="background-image: url('{% static 'images/Wallpaper2.jpg' %}')" alt="Wallpaper">
+<!--# Edit Product - Response message-->
+<div class="container mt-4 mb-4 card border-success border-3 pt-2 pb-3">
+    <h2> <b> Delete Product </b> </h2> <br>
+
+{% if messages %}
+        <ul class="messages">
+                {% for each_message in messages %}
+                        <li {% if each_message.tags %} class="{{ each_message.tags }}" {% endif %} style="color:green;">
+                                {{ each_message }}
+                        </li>
+                {% endfor %}
+        </ul>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- # To align fields-->
+    {{form.as_p}}
+    <p> <b>Do you really want to delete?</b> <b> <h2>{{product.name}} </h2> </b></p>
+    <center>
+        <img src="{{product.image.url}}" alt="Logo" style="height: 400px; width: 430px;"> <br>
+    </center>
+
+    <a href="{% url 'home' %}" class="btn btn-dark"> Go back to Home </a>
+    <input type="submit" value="Delete Product" class="btn btn-danger float-right">
+</form>
+</div>
+</div>
+
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light background */
+}
+
+.container {
+    border: 2px solid #000;
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space around the form */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    max-width: 500px; /* Limit the width */
+    margin: auto; /* Center the form */
+}
+
+</style>
+
+{% endblock %}

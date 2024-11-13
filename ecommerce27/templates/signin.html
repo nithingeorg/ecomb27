@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-1 pb-1">
+<!--# To display Website Logo    -->
+  <a class="navbar-brand">
+    <img src="{% static 'images/ShopLogo.jpg' %}" alt="Logo" style="height: 80px; width: 130px;">
+  </a>
+
+<!--# Menu to open Home page-->
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active mr-4">
+        <a class="nav-link" href="/" style="font-size:20px; font-family:Arial;"> <b> Home </b> <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div style="background-image: url('{% static 'images/Wallpaper9.jpg' %}')" alt="Wallpaper">
+<div class="form-container mt-4 mb-4">
+        <h2> <b> Login Form </b> </h2>
+        <form method="post" action="/signin/">
+        {% csrf_token %}
+            <div class="form-group">
+                <label for="username"> Username: </label>
+                <input type="text" class="form-control" name="username" required> <br> <br>
+            </div>
+
+            <div class="form-group">
+                <label for="password"> Password: </label>
+                <input type="password" class="form-control" name="password1" required> <br> <br>
+            </div>
+
+            <div class="form-group">
+                <input type="reset" class="btn btn-secondary mr-2" value="Reset">
+                <input type="submit" class="btn btn-primary mr-5" value="Login"> <br> <br>
+
+<!--# Link to open Registration page-->
+                <h5> <b> Don't have an account? </b>
+                    <a href="/signup"> Register </a>
+                </h5>
+            </div>
+        </form>
+<!--# Invalid Login Credentials - Response message-->
+{% if messages %}
+        <ul class="messages">
+                {% for each_message in messages %}
+                        <li {% if each_message.tags %} class="{{ each_message.tags }}" {% endif %} style="color:red;">
+                                <h4> {{ each_message }} </h4>
+                        </li>
+                {% endfor %}
+        </ul>
+{% endif %}
+</div>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light background */
+}
+.form-container {
+    border: 2px solid #000;
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space around the form */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    max-width: 480px; /* Limit the width */
+    margin: auto; /* Center the form */
+}
+</style>
+</div>
+{% endblock %}
+

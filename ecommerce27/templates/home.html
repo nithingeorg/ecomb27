@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Shopify
+{% endblock %}
+
+{% block content %}
+
+<!--To display in default format-->
+<!--<div>-->
+<!--    <h1>Products</h1>-->
+<!--    <div>-->
+<!--        {% for each_product in products %}-->
+<!--            <img src="{{each_product.image.url}}" alt="Product Image"><br>-->
+<!--            {{each_product.name}} <br>-->
+<!--            {{each_product.price}} <br>-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+<!--</div>-->
+<div>
+    <h1>
+        <center> <b> Choose your Products </b>
+        <a href="#">
+        <img src="{% static 'images/Cart Icon.jpg' %}" alt="Logo" style="height: 95px; width: 100px;">
+        </a>
+        </center>
+    </h1>
+</div>
+<div style="background-image: url('{% static 'images/Wallpaper5.jpg' %}')" alt="Wallpaper">
+
+<!--# To add new products through Website panel    -->
+<div class="row pt-2 ml-1">
+    <div class="col-3"> <a href="{% url 'add_product' %}" class="btn btn-info"> <b> Add New Product </b> </a> </div>
+</div>
+
+<!--To display in 3 products in a row-->
+<div class="container">
+    <div class="row">
+        {% for each_product in products %}
+        <div class="col-md-4 mb-0">
+            <!--To display in Card format-->
+            <div class="card border-success border-3 pt-2 pb-1" style="height: 90%; width: 90%;">
+                <center>
+                    <img src="{{each_product.image.url}}" alt="Product Image" style="height:250px; width:250px;">
+                </center>
+                <div class="card-body">
+                    <center> <h5 class="card-title"> {{each_product.name}} </h5> </center>
+                    <center> <p class="card-text" style="padding:10px;"> {{each_product.desc}} </p> </center> <br>
+                </div>
+                <center> <p class="card-text" style="padding:25px;"> <b> Rs. {{each_product.price}} </b> </p> </center>
+                <a href="{% url 'add_to_cart' each_product.id %}" class="btn btn-success d-block mx-auto" style="width:250px;"> <b> Add to Cart </b> </a> <br>
+                <a href="{% url 'edit_product' each_product.id %}" class="btn btn-warning d-block mx-auto" style="width:250px;"> <b> Edit Product </b> </a> <br>
+                <a href="{% url 'delete_product' each_product.id %}" class="btn btn-danger d-block mx-auto" style="width:250px;"> <b> Delete Product </b> </a> <br>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}
+</div>

@@ -1,0 +1,95 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Registration
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-2 pb-2">
+<!--# To display Website Logo    -->
+  <a class="navbar-brand">
+    <img src="{% static 'images/ShopLogo.jpg' %}" alt="Logo" style="height: 80px; width: 130px;">
+  </a>
+
+<!--# Menu to open Home page-->
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active mr-4">
+        <a class="nav-link" href="/" style="font-size:20px; font-family:Arial;"> <b> Home </b> <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div style="background-image: url('{% static 'images/Wallpaper3.jpg' %}')" alt="Wallpaper">
+
+<div class="form-container mt-1 mb-1">
+   <h2> <b> Registration Form </b> </h2>
+   <form method="post" action="/signup/">
+       <!--Used to secure the data-->
+       {% csrf_token %}
+
+       <div class="form-group">
+           <label for="fname">First Name:</label>
+           <input type="text" class="form-control" name="fname" required>
+       </div>
+
+       <div class="form-group">
+           <label for="lname">Last Name:</label>
+           <input type="text" class="form-control" name="lname" required>
+       </div>
+
+       <div class="form-group">
+           <label for="username">Username:</label>
+           <input type="text" class="form-control" name="username" required>
+       </div>
+
+       <div class="form-group">
+           <label for="password1">Password:</label>
+           <input type="password" class="form-control" name="password1" required>
+       </div>
+
+       <div class="form-group">
+           <label for="password2">Confirm Password:</label>
+           <input type="password" class="form-control" name="password2" required>
+       </div>
+
+       <div class="form-group">
+           <label for="email">Email ID:</label>
+           <input type="email" class="form-control" name="email" required>
+       </div>
+
+       <div class="form-group">
+           <input type="reset" class="btn btn-secondary mr-2" value="Reset">
+           <input type="submit" class="btn btn-primary" value="Register"> <br> <br>
+
+<!--# Link to open Login page-->
+                <h5> <b> Already have an account? </b>
+                    <a href="/signin"> Login </a>
+                </h5>
+       </div>
+   </form>
+</div>
+</div>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light background */
+}
+
+.form-container {
+    border: 2px solid #000;
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Space around the form */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    max-width: 500px; /* Limit the width */
+    margin: auto; /* Center the form */
+}
+</style>
+
+{% endblock %}

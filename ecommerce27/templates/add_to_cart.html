@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div style="background-image: url('{% static 'images/Wallpaper6.jpg' %}')" alt="Wallpaper">
+<div class="container mt-4 mb-4 card border-success border-3 pt-2 pb-3">
+
+<!--# Add Product to Cart - Response message-->
+{% if messages %}
+        <ul class="messages">
+                {% for each_message in messages %}
+                        <li {% if each_message.tags %} class="{{ each_message.tags }}" {% endif %}>
+                                {{ each_message }}
+                        </li>
+                {% endfor %}
+        </ul>
+{% endif %}
+    <h3> <b> Cart Page </b> </h3>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- # To align fields-->
+    {{form.as_p}}
+    <div class="card border-success border-3 pt-2 pb-5">
+        <h4 style="color:orange"> Sorry, work in progress.. </h4>
+        <center> <img src="{{each_product.image.url}}" alt="Product Image" style="height:250px; width:250px;"> </center>
+        <center> <h5 class="card-title"> {{each_product.name}} </h5> </center>
+        <center> <p class="card-title"> {{each_product.desc}} </p> </center> <br>
+    </div>
+<br>
+    <a href="{% url 'home' %}" class="btn btn-dark"> Go back to Home </a>
+    <input type="submit" value="Continue for Payment" class="btn btn-success float-right">
+    </div>
+</form>
+</div>
+</div>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light background */
+}
+
+.container {
+    border: 2px solid #000;
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space around the form */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    max-width: 500px; /* Limit the width */
+    margin: auto; /* Center the form */
+}
+
+</style>
+
+{% endblock %}
